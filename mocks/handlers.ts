@@ -7,6 +7,12 @@ export const handlers = [
       username: "admin",
     });
   }),
+  http.get("/api/fail", async () => {
+    await delay(1000);
+    return new HttpResponse(JSON.stringify({ error: "Failed to fetch" }), {
+      status: 400,
+    });
+  }),
   http.get("/api/articles", async () => {
     await delay(1000);
     return HttpResponse.json({

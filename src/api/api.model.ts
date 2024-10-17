@@ -15,7 +15,7 @@ export const articlesResource = reatomResource(async (ctx) => {
   const s = ctx.spy(startDateAtom);
   const e = ctx.spy(endDateAtom);
   return await ctx.schedule(() =>
-    fetch("/api/articles" + `?startDate=${s}&endDate=${e}`).then(
+    fetch("/api/fail" + `?startDate=${s}&endDate=${e}`).then(
       (res) =>
         res.json() as Promise<{
           data: { posts: { id: number; title: string }[] };
