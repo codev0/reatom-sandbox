@@ -1,29 +1,27 @@
 import { reatomComponent } from "@reatom/npm-react";
-import { reatomArticles } from "./articles.model";
+import { articles, fromAtom, toAtom, loading } from "./articles.model";
 
 export const Articles = reatomComponent(({ ctx }) => {
-  const model = ctx.spy(reatomArticles);
-
   return (
     <>
       <h1>Articles</h1>
-      {ctx.spy(model.loading).isPending && <div>Loading...</div>}
+      {ctx.spy(loading).isPending && <div>Loading...</div>}
       <div>
         <label>
           From
-          <input type="date" defaultValue={ctx.spy(model.from)} />
-          {ctx.spy(model.from) === undefined && <span>UNDEFINED ❌</span>}
+          <input type="date" value={ctx.spy(fromAtom)} readOnly />
+          {ctx.spy(fromAtom) === undefined && <span>UNDEFINED ❌</span>}
         </label>
         <hr />
         <label>
           To
-          <input type="date" defaultValue={ctx.spy(model.to)} />
-          {ctx.spy(model.to) === undefined && <span>UNDEFINED ❌</span>}
+          <input type="date" value={ctx.spy(toAtom)} readOnly />
+          {ctx.spy(toAtom) === undefined && <span>UNDEFINED ❌</span>}
         </label>
       </div>
-      {model.articles && (
+      {ctx.spy(articles) && (
         <ul>
-          {model.articles.map((article) => (
+          {ctx.spy(articles)?.data.posts.map((article) => (
             <li key={article.id}>
               <h2>{article.title}</h2>
             </li>
